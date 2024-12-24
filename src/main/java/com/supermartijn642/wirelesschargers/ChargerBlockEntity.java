@@ -2,7 +2,6 @@ package com.supermartijn642.wirelesschargers;
 
 import com.supermartijn642.core.block.BaseBlockEntity;
 import com.supermartijn642.core.block.TickableBlockEntity;
-import com.supermartijn642.wirelesschargers.compat.ModCompatibility;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -18,7 +17,6 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.IItemHandlerModifiable;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -132,27 +130,6 @@ public class ChargerBlockEntity extends BaseBlockEntity implements TickableBlock
                 loop:
                 for(Player player : players){
                     int toTransfer = Math.min(this.energy, this.type.transferRate.get());
-                    // Check Curios/Baubles slots
-                    IItemHandlerModifiable handler = ModCompatibility.curios.getCuriosStacks(player);
-                    for(int i = 0; i < handler.getSlots(); i++){
-                        ItemStack stack = handler.getStackInSlot(i);
-                        if(!stack.isEmpty()){
-//                            LazyOptional<IEnergyStorage> optional = stack.getCapability(ForgeCapabilities.ENERGY); // TODO
-//                            final int max = toTransfer;
-//                            int transferred = optional.map(storage -> storage.receiveEnergy(max, false)).orElse(0);
-//                            if(transferred > 0){
-//                                handler.setStackInSlot(i, stack);
-//                                spawnParticles = true;
-//                                this.energy -= transferred;
-//                                this.dataChanged();
-//                                if(this.energy <= 0)
-//                                    break loop;
-//                                toTransfer -= transferred;
-//                                if(toTransfer <= 0)
-//                                    continue loop;
-//                            }
-                        }
-                    }
                     // Check player inventory
                     Inventory inventory = player.getInventory();
                     for(int i = 0; i < inventory.getContainerSize(); i++){
