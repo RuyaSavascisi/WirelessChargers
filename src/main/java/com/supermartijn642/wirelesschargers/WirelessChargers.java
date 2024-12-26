@@ -38,8 +38,8 @@ public class WirelessChargers implements ModInitializer {
 
     public static void registerGenerators(){
         GeneratorRegistrationHandler handler = GeneratorRegistrationHandler.get("wirelesschargers");
-        handler.addGenerator(ChargerModelGenerator::new);
         handler.addGenerator(ChargerBlockStateGenerator::new);
+        handler.addGenerator(ChargerItemInfoGenerator::new);
         handler.addGenerator(ChargerLanguageGenerator::new);
         handler.addGenerator(ChargerLootTableGenerator::new);
         handler.addGenerator(ChargerRecipeGenerator::new);

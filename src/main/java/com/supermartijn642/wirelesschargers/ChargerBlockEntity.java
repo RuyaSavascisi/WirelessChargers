@@ -48,7 +48,6 @@ public class ChargerBlockEntity extends BaseBlockEntity implements TickableBlock
         this.type = type;
     }
 
-    @SuppressWarnings("UnstableApiUsage")
     @Override
     public void update(){
         if(this.level.isClientSide){
