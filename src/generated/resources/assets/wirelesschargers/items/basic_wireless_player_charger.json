@@ -1,0 +1,19 @@
+{
+  "model": {
+    "models": [
+      {
+        "model": "wirelesschargers:block/basic_wireless_charger",
+        "type": "minecraft:model"
+      },
+      {
+        "base": "wirelesschargers:block/basic_wireless_charger",
+        "model": {
+          "charger": "BASIC_WIRELESS_PLAYER_CHARGER",
+          "type": "wirelesschargers:charger"
+        },
+        "type": "minecraft:special"
+      }
+    ],
+    "type": "minecraft:composite"
+  }
+}
