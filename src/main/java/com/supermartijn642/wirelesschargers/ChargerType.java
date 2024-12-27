@@ -1,5 +1,7 @@
 package com.supermartijn642.wirelesschargers;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.supermartijn642.core.block.BaseBlockEntityType;
 import com.supermartijn642.core.item.BaseBlockItem;
 import com.supermartijn642.core.item.ItemProperties;
@@ -23,6 +25,17 @@ public enum ChargerType {
     ADVANCED_WIRELESS_BLOCK_CHARGER(true, false, WirelessChargersConfig.advancedBlockChargerRange, WirelessChargersConfig.advancedBlockChargerCapacity, WirelessChargersConfig.advancedBlockChargerTransferRate, ChargerModelType.ADVANCED_WIRELESS_BLOCK_CHARGER, "Advanced Wireless Block Charger"),
     BASIC_WIRELESS_PLAYER_CHARGER(false, true, WirelessChargersConfig.basicPlayerChargerRange, WirelessChargersConfig.basicPlayerChargerCapacity, WirelessChargersConfig.basicPlayerChargerTransferRate, ChargerModelType.BASIC_WIRELESS_PLAYER_CHARGER, "Basic Wireless Player Charger"),
     ADVANCED_WIRELESS_PLAYER_CHARGER(false, true, WirelessChargersConfig.advancedPlayerChargerRange, WirelessChargersConfig.advancedPlayerChargerCapacity, WirelessChargersConfig.advancedPlayerChargerTransferRate, ChargerModelType.ADVANCED_WIRELESS_PLAYER_CHARGER, "Advanced Wireless Player Charger");
+
+    public static final Codec<ChargerType> CODEC = Codec.STRING.comapFlatMap(
+        s -> {
+            try{
+                return DataResult.success(ChargerType.valueOf(s.toUpperCase(Locale.ROOT)));
+            }catch(IllegalArgumentException ignored){
+                return DataResult.error(() -> "Unknown charger type: " + s);
+            }
+        },
+        Enum::name
+    );
 
     private BaseBlockEntityType<ChargerBlockEntity> blockEntityType;
     private ChargerBlock block;
